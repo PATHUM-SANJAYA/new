@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "A configurable personal website template for minimalists.",
-  "homepage": ".",
+  "homepage": "https://pathum-sanjaya.github.io/new",
   "license": "Apache-2.0",
   "keywords": [
     "website",
@@ -11,12 +11,12 @@
     "web developer"
   ],
   "author": {
-    "name": "Fawad Ali",
-    "email": "m.fawaadali98@gmail.com",
-    "url": "https://github.com/9inpachi"
+    "name": "Pathum Sanjaya",
+    "email": "graphicdesigninglk@gmail.com",
+    "url": "https://github.com/PATHUM-SANJAYA"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=8080 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
