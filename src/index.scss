@@ -1,0 +1,268 @@
+// Importing fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+// Import mobile optimizations
+@import './mobile-optimizations.scss';
+
+// Variables for light theme
+:root {
+    // Main colors
+    --bg-primary: #f8f9fa;
+    --bg-primary-rgb: 248, 249, 250;
+    --bg-secondary: #ffffff;
+    --bg-secondary-rgb: 255, 255, 255;
+    --text-primary: #2d3436;
+    --text-secondary: #636e72;
+    
+    // Accent colors
+    --accent-primary: #0984e3;
+    --accent-primary-rgb: 9, 132, 227;
+    --accent-secondary: #6c5ce7;
+    --accent-secondary-rgb: 108, 92, 231;
+    --accent-tertiary: #00cec9;
+    --accent-tertiary-rgb: 0, 206, 201;
+    --accent-quaternary: #fd79a8;
+    --accent-quaternary-rgb: 253, 121, 168;
+    
+    // Gradient colors
+    --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    --gradient-secondary: linear-gradient(135deg, var(--accent-tertiary), var(--accent-quaternary));
+    
+    // UI elements
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    --button-shadow: 0 5px 15px rgba(9, 132, 227, 0.2);
+    --hover-transition: all 0.3s ease;
+    
+    font-size: 16px;
+}
+
+// Variables for dark theme
+.dark-mode {
+    // Main colors
+    --bg-primary: #0a0a0a;
+    --bg-primary-rgb: 10, 10, 10;
+    --bg-secondary: #121212;
+    --bg-secondary-rgb: 18, 18, 18;
+    --text-primary: #f8f9fa;
+    --text-secondary: #adb5bd;
+    
+    // Accent colors with more vibrant neon feel
+    --accent-primary: #00eeff;
+    --accent-primary-rgb: 0, 238, 255;
+    --accent-secondary: #7928ca;
+    --accent-secondary-rgb: 121, 40, 202;
+    --accent-tertiary: #00f260;
+    --accent-tertiary-rgb: 0, 242, 96;
+    --accent-quaternary: #ff0080;
+    --accent-quaternary-rgb: 255, 0, 128;
+    
+    // Gradient colors
+    --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    --gradient-secondary: linear-gradient(135deg, var(--accent-tertiary), var(--accent-quaternary));
+    
+    // UI elements
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    --neon-glow: 0 0 8px rgba(var(--accent-primary-rgb), 0.4), 0 0 16px rgba(var(--accent-primary-rgb), 0.2);
+    --text-glow: 0 0 2px rgba(var(--accent-primary-rgb), 0.5);
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    // Transition for dark mode
+    transition: all 0.3s ease;
+    overflow-x: hidden;
+    position: relative;
+    
+    // Modern background effect - optimized by device
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        pointer-events: none;
+        
+        @media (min-width: 1024px) {
+            // Modern grid for desktop/Mac only
+            background-image: 
+                linear-gradient(rgba(var(--accent-primary-rgb), 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(var(--accent-primary-rgb), 0.03) 1px, transparent 1px);
+            background-size: 70px 70px;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 1023px) {
+            // Simple background for mobile
+            background-color: var(--bg-primary);
+        }
+    }
+    
+    // Gradient overlay - optimized by device
+    &::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+        
+        @media (min-width: 1024px) {
+            // Rich gradients for desktop/Mac only
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(var(--accent-primary-rgb), 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(var(--accent-secondary-rgb), 0.05) 0%, transparent 40%);
+            animation: gradientMove 30s infinite alternate ease-in-out;
+        }
+        
+        @media (max-width: 1023px) {
+            // Simple gradient for mobile
+            background: radial-gradient(circle at 50% 50%, rgba(var(--accent-primary-rgb), 0.02) 0%, transparent 70%);
+        }
+    }
+    
+    // Animated particles
+    .particle {
+        position: fixed;
+        width: 2px;
+        height: 2px;
+        background-color: rgba(var(--accent-primary-rgb), 0.4);
+        border-radius: 50%;
+        z-index: -1;
+        pointer-events: none;
+        box-shadow: 0 0 8px rgba(var(--accent-primary-rgb), 0.6);
+        animation: particleFade 4s infinite ease-in-out;
+        will-change: opacity, transform; // Performance optimization
+        
+        @for $i from 1 through 15 { // Reduced from 20 to 15
+            &:nth-child(#{$i}) {
+                top: random(100) * 1%;
+                left: random(100) * 1%;
+                animation-delay: $i * 0.3s; // Slower animation starts
+                animation-duration: 3s + random(3) * 1s; // More consistent durations
+            }
+        }
+    }
+}
+
+input, textarea, button {
+    font-family: inherit;
+}
+
+.body-wrapper {
+    width: 1100px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    position: relative;
+    transition: var(--hover-transition);
+
+    &:hover {
+        color: var(--accent-secondary);
+        text-decoration: none;
+    }
+    
+    &.animated-link {
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: var(--gradient-primary);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        
+        &:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    }
+}
+
+.MuiTooltip-tooltip {
+    font-size: 1em !important;
+}
+
+// Animation keyframes for modern effects
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes particleFade {
+    0%, 100% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-20px) scale(1.2);
+    }
+}
+
+@keyframes neonPulse {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(var(--accent-primary-rgb), 0.5),
+                  0 0 10px rgba(var(--accent-primary-rgb), 0.3);
+        text-shadow: 0 0 3px rgba(var(--accent-primary-rgb), 0.7);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(var(--accent-primary-rgb), 0.8),
+                  0 0 20px rgba(var(--accent-primary-rgb), 0.5),
+                  0 0 30px rgba(var(--accent-primary-rgb), 0.3);
+        text-shadow: 0 0 5px rgba(var(--accent-primary-rgb), 1);
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 5px rgba(var(--accent-primary-rgb), 0.5);
+    }
+    50% {
+        border-color: var(--accent-secondary);
+        box-shadow: 0 0 15px rgba(var(--accent-secondary-rgb), 0.5);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0.3rem;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: var(--text-primary);
+    border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
