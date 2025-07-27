@@ -96,7 +96,7 @@ const CommonConfig = {
         {
             name: "CV",
             icon: Icons['link'],
-            link: "https://drive.google.com/file/d/1wiJaibcQjZEfwzcAhK2AsQuqzEUvtTJE/view?usp=sharing"
+            link: "https://drive.google.com/file/d/10QRCR5pjl3nXHxbnePUc4dSbl0ab4xkI/view"
         }
     ]
 };
